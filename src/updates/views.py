@@ -5,6 +5,8 @@ from django.views.generic import View
 from cfeapi.mixins import JsonResponseMixin
 from .models import Updates
 from django.core.serializers import serialize
+
+
 def json_example_view(request):
     # URI -- for REST API
     data = {
