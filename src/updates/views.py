@@ -2,7 +2,7 @@ import json
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.views.generic import View
-from cfeapi.mixins import JsonResponseMixin
+from myapi.mixins import JsonResponseMixin
 from .models import Updates
 from django.core.serializers import serialize
 
