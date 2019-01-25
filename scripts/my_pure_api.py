@@ -1,6 +1,5 @@
 import json
-import requests # http requests
-
+import requests  # http requests
 
 BASE_URL = "http://127.0.0.1:8000/"
 
@@ -31,43 +30,32 @@ def get_list():
 def create_update():
     new_data = {
         "user": 1,
-        "content": "Some more new Content"
+        "content": "Rocking new Content"
     }
-    # r = requests.post(BASE_URL + ENDPOINT + "1/", data=new_data)
-    r = requests.post(BASE_URL + ENDPOINT, data=json.dumps(new_data))
-    print(r.status_code)
-    print(r.text)
-    # print(r.headers)
-    if r.status_code == requests.codes.ok:
-        print(r.json())
-        return r.json()
-    return r.text
-
-
-# create_update()
-
-
-def do_obj_update():
-    new_data = {
-        # "user": 1,
-        "content": "New obj data"
-    }
-
-    # new_data = {
-    #     "id": 1,
-    #     "content": "Some more new Content"
-    # }
-    # r = requests.put(BASE_URL + ENDPOINT,  data=new_data)
-
-    r = requests.put(BASE_URL + ENDPOINT + "1/", data=json.dumps(new_data))
-    # r = requests.put(BASE_URL + ENDPOINT + "1/", data=new_data)
-
-    # print(r.headers)
+    data = json.dumps(new_data)
+    print(type(data))
+    r = requests.post(BASE_URL + ENDPOINT, data=data)
     print(r.status_code)
     if r.status_code == requests.codes.ok:
         # print(r.json())
         return r.json()
     return r.text
+
+
+# print(create_update())
+
+
+def do_obj_update():
+    new_data = {
+        "content": "Some New obj data"
+    }
+    r = requests.put(BASE_URL + ENDPOINT + "1/", data=json.dumps(new_data))
+    print(r.status_code)
+    if r.status_code == requests.codes.ok:
+        print(r.json())
+        return r.json()
+    return r.json()
+
 
 # print(do_obj_update())
 
@@ -76,19 +64,17 @@ def do_obj_delete():
     new_data = {
         "content": "New obj data"
     }
-    r = requests.delete(BASE_URL + ENDPOINT + "7/")
+    r = requests.delete(BASE_URL + ENDPOINT + "6/")
     # new_data = {
     #     'id': 1
     #     "content": "Another more cool content"
     # }
     # r = requests.put(BASE_URL + ENDPOINT, data=new_data)
-    #print(r.headers)
+    # print(r.headers)
     print(r.status_code)
     if r.status_code == requests.codes.ok:
-        #print(r.json())
+        # print(r.json())
         return r.json()
     return r.text
-
-
 
 print(do_obj_delete())
