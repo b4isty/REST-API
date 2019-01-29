@@ -21,7 +21,7 @@ class StatusListSearchAPIView(APIView):
         return Response(serializer.data)
 
 
-class StatusAPIView(mixins.CreateModelMixins, generics.ListAPIView):
+class StatusAPIView(mixins.CreateModelMixin,generics.ListAPIView):
     permission_classes = []
     authentication_classes = []
     queryset = Status.objects.all()
@@ -34,23 +34,40 @@ class StatusAPIView(mixins.CreateModelMixins, generics.ListAPIView):
             qs = qs.filter(content__icontains=query)
         return qs
 
+    def post(self, request,*args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
-class StatusCreateAPIView(generics.CreateAPIView):
-    permission_classes = []
-    authentication_classes = []
-    queryset = Status.objects.all()
-    serializer_class = StatusSerializer
+
+# class StatusCreateAPIView(generics.CreateAPIView):
+#     permission_classes = []
+#     authentication_classes = []
+#     queryset = Status.objects.all()
+#     serializer_class = StatusSerializer
 
     # def perform_create(self, serializer):
     #     serializer.save(user=self.request.user)
 
-
-class StatusDetailAPIView(generics.RetrieveAPIView):
+class StatusDetailAPIView(generics.RetrieveAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
     permission_classes = []
     authentication_classes = []
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
     # lookup_field = 'id'  # 'slug
+
+
+# class StatusDetailAPIView(mixins.DestroyModelMixin, mixins.UpdateModelMixin,generics.RetrieveAPIView):
+#     permission_classes = []
+#     authentication_classes = []
+#     queryset = Status.objects.all()
+#     serializer_class = StatusSerializer
+#     # lookup_field = 'id'  # 'slug
+#
+#
+#     def put(self, requests, *args, **kwargs):
+#         return self.update(requests, *args, **kwargs)
+#
+#     def delete(self, requests, *args, **kwargs):
+#         return self.destroy(requests, *args, **kwargs)
 
     # def get_object(self, *args, **kwargs):
     #     kwargs = self.kwargs
