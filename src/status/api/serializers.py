@@ -10,6 +10,7 @@ class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Status
         fields = ['id','user', 'content', 'image']
+        read_only_fields = ['user']  #GET
 
     # def validate_content(self, value):
     #     if len(value) > 10000:
@@ -24,4 +25,5 @@ class StatusSerializer(serializers.ModelSerializer):
         if image is None and content is None:
             raise serializers.ValidationError("Content or Image is required.")
         return data
+
 

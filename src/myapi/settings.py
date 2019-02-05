@@ -130,5 +130,5 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static-server', 'media-roo
 MEDIA_URL = '/media/'
 
 
-
+from myapi.restconf.main import *
 
