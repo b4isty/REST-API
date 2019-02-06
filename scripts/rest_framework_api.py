@@ -2,20 +2,30 @@ import requests
 import json
 import os
 
-AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/jwt"
+AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/jwt/"
 ENDPOINT = "http://127.0.0.1:8000/api/status/"
+REFRESH_ENDPOINT = AUTH_ENDPOINT + "refresh/"
 image_path = os.path.join(os.getcwd(), "logo.png")
 
+headers = {
+    "Content-Type": "application/json"
+}
 
 data ={
     "username": "admin",
     "password": "pass#123"
 }
 
-r = requests.post(AUTH_ENDPOINT, data=data)
-# print(r.json())
+r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
 token = r.json()['token']
 print(token)
+
+refresh_data = {
+    'token': token
+}
+refresh_response = requests.post(REFRESH_ENDPOINT, data=json.dumps(refresh_data), headers=headers)
+refresh_token = refresh_response.json() #['token']
+print(refresh_token)
 
 
 # get_endpoint = ENDPOINT + str(1)
