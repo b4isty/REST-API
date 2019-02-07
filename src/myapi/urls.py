@@ -21,8 +21,8 @@ from updates.views import json_example_view, JsonCBV, JsonCBV2, SerializedListVi
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/auth/jwt', obtain_jwt_token),
-    url(r'^api/auth/jwt/refresh', refresh_jwt_token),
+    url(r'^api/auth/jwt/$', obtain_jwt_token),
+    url(r'^api/auth/jwt/refresh/$', refresh_jwt_token),
     url(r'^api/updates/', include('updates.api.urls')),
     url(r'^api/post/', include('blog.api.urls')),
     url(r'^api/status/', include('status.api.urls')),
