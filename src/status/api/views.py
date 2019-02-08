@@ -9,7 +9,6 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 
-
 # CreateModelMixin -- POST method
 # UpdateModelMixin -- PUT method
 # DestroyModelMixin -- DELETE method
@@ -52,6 +51,7 @@ class StatusAPIDetailView(mixins.UpdateModelMixin,
 
 
 # here permission class work like Login required mixin or decorator
+
 class StatusAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     # authentication_classes = [SessionAuthentication]

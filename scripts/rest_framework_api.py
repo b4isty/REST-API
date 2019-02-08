@@ -3,12 +3,33 @@ import json
 import os
 
 ENDPOINT = "http://127.0.0.1:8000/api/status/"
-AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/jwt/"
-data = {'username': "admin", 'password': "pass#123"}
-r = requests.post(AUTH_ENDPOINT, data=data)
-token = r.json()['token']
-print(r)
-print(r.json())
+
+AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/register/"
+# AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/"
+# AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/jwt/"
+image_path = os.path.join(os.getcwd(), "logo.png")
+
+headers = {
+    "Content-Type": "application/json",
+    # "Authorization": "JWT " + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTQ5NjI2NDIyLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwib3JpZ19pYXQiOjE1NDk2MjYxMjJ9.mNjLyhfUiNkpedKUOf2DZsY0Xag7rI6xanFGzcDa4XY'
+}
+
+
+data = {
+    'username': "bdg4",
+    'email': "bdg4@example.com",
+    'password': "pass#123",
+    'password2': "pass#123"
+}
+
+# data = {
+#     'username': "admin",
+#     'password': "pass#123",
+# }
+r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
+token = r.json()#['token']
+print(r.text)
+
 
 # REFRESH_ENDPOINT = AUTH_ENDPOINT + 'refresh/'
 
@@ -17,28 +38,29 @@ print(r.json())
 # print(token)
 
 
-image_path = os.path.join(os.getcwd(), "logo.png")
 
 # get_endpoint = ENDPOINT + str(14)
 # r = requests.get(get_endpoint)
 # print(r.status_code)
 
-headers = {"Authorization": "JWT " + token}
+# headers = {"Authorization": "JWT " + token}
 
-post_data = {"content": "Updated random contents"}
-with open(image_path, 'rb') as image:
-    file_data = {
-        'image': image
-    }
-    posted_response = requests.post(ENDPOINT, data=post_data, files=file_data, headers=headers)
-    # posted_response = requests.put(ENDPOINT +"25/", data=post_data, files=file_data, headers=headers)
-    print(posted_response.text)
-    # get_endpoint = ENDPOINT + str(12)
-
-
+# post_data = {"content": "Updated random contents"}
+# with open(image_path, 'rb') as image:
+#     file_data = {
+#         'image': image
+#     }
+#     posted_response = requests.post(ENDPOINT, data=post_data, files=file_data, headers=headers)
+#     # posted_response = requests.put(ENDPOINT +"25/", data=post_data, files=file_data, headers=headers)
+#     print(posted_response.text)
+#     # get_endpoint = ENDPOINT + str(12)
 
 
-#
+
+
+
+
+
 #
 # import requests
 # import json
