@@ -28,8 +28,8 @@ token = r.json()['token']
 print(token)
 
 
-ENDPOINT = "http://127.0.0.1:8000/api/status/12/"
 BASE_ENDPOINT = "http://127.0.0.1:8000/api/status/"
+ENDPOINT = BASE_ENDPOINT + "12/"
 
 headers2 = {
     # "Content-Type" "application/json"
