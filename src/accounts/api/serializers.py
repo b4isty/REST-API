@@ -48,10 +48,10 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     def get_message(self, obj):
         return "Thank you for registration. Please verify your email before continuing "
 
-    def get_expires(self,obj):
+    def get_expires(self, obj):
         return timezone.now() + expire_delta - datetime.timedelta(seconds=200)
 
-    def get_token(self, obj):   #instance of the model
+    def get_token(self, obj):  # instance of the model
         user = obj
         payload = jwt_payload_handler(user)
         token = jwt_encode_handler(payload)
@@ -78,7 +78,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-        print("Validate_data",validated_data)
+        print("Validate_data", validated_data)
         user_obj = User(
             username=validated_data.get("username"),
             email=validated_data.get("email")

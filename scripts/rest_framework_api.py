@@ -2,30 +2,84 @@ import requests
 import json
 import os
 
-ENDPOINT = "http://127.0.0.1:8000/api/status/"
 
-AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/register/"
-# AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/"
+
+AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/"
 # AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/jwt/"
 image_path = os.path.join(os.getcwd(), "logo.png")
 
 headers = {
     "Content-Type": "application/json",
-    "Authorization": "JWT " + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMSwidXNlcm5hbWUiOiJiZGc5IiwiZXhwIjoxNTQ5NzE5MzI5LCJlbWFpbCI6ImJkZzlAZXhhbXBsZS5jb20iLCJvcmlnX2lhdCI6MTU0OTcxOTAyOX0.C_yeEuIc8pLFFpYKpwHDZQSCCbkCfgqc5Ixc8Qeb4Js'
+    # "Authorization": "JWT " + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMSwidXNlcm5hbWUiOiJiZGc5IiwiZXhwIjoxNTQ5NzE5MzI5LCJlbWFpbCI6ImJkZzlAZXhhbXBsZS5jb20iLCJvcmlnX2lhdCI6MTU0OTcxOTAyOX0.C_yeEuIc8pLFFpYKpwHDZQSCCbkCfgqc5Ixc8Qeb4Js'
 }
 
 
+# data = {
+#     'username': "admin",
+#     'password': "pass#123"
+# }
 data = {
-    'username': "bdg12",
-    'email': "bdg12@example.com",
-    'password': "pass#123",
-    'password2': "pass#123"
+    'username': "bdg",
+    'password': "pass#123"
 }
-
 
 r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
-token = r.json()#['token']
-print(r.json())
+token = r.json()['token']
+print(token)
+
+
+ENDPOINT = "http://127.0.0.1:8000/api/status/12/"
+BASE_ENDPOINT = "http://127.0.0.1:8000/api/status/"
+
+headers2 = {
+    # "Content-Type" "application/json"
+    "Authorization": "JWT " + token
+}
+
+data2 = {
+    "content": "New Content by me"
+}
+
+
+with open(image_path, 'rb') as image:
+    file_data = {
+        "image": image
+    }
+    r2 = requests.put(ENDPOINT, data=data2, headers=headers2, files=file_data)
+print(r2.text)
+
+    # respons = requests.post(BASE_ENDPOINT, data=data2, files=file_data, headers=headers2)
+# print(respons.text)
+
+
+
+# import requests
+# import json
+# import os
+#
+# ENDPOINT = "http://127.0.0.1:8000/api/status/"
+#
+# AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/register/"
+# # AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/"
+# # AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/jwt/"
+# image_path = os.path.join(os.getcwd(), "logo.png")
+#
+# headers = {
+#     "Content-Type": "application/json",
+#     "Authorization": "JWT " + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMSwidXNlcm5hbWUiOiJiZGc5IiwiZXhwIjoxNTQ5NzE5MzI5LCJlbWFpbCI6ImJkZzlAZXhhbXBsZS5jb20iLCJvcmlnX2lhdCI6MTU0OTcxOTAyOX0.C_yeEuIc8pLFFpYKpwHDZQSCCbkCfgqc5Ixc8Qeb4Js'
+# }
+#
+#
+# data = {
+#     'username': "bdg12",
+#     'email': "bdg12@example.com",
+#     'password': "pass#123",
+#     'password2': "pass#123"
+# }
+#
+# r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
+# token = r.json()#['token']
+# print(r.json())
 # print(r.text)
 
 
@@ -39,6 +93,8 @@ print(r.json())
 # r = requests.post(url=REFRESH_ENDPOINT, data=json.dumps({'token': token}), headers=headers)
 # token = r.json()
 # print(token)
+
+
 
 
 
@@ -64,37 +120,10 @@ print(r.json())
 
 
 
-#
-# import requests
-# import json
-# import os
-#
-# ENDPOINT = "http://127.0.0.1:8000/api/status/"
-# AUTH_ENDPOINT = "http://127.0.0.1:8000/api/auth/jwt/"
-# REFRESH_ENDPOINT = AUTH_ENDPOINT + 'refresh/'
-# data = {'username': "admin", 'password': "pass#123"}
-# headers = {"content-type": "application/json"}
-#
-#
-# r = requests.post(AUTH_ENDPOINT, data=json.dumps(data),  headers=headers)
-# token = r.json()['token']
-# print(token)
-#
-#
-#
-#
-# # refresh = requests.post(url=REFRESH_ENDPOINT, data=json.dumps({'token': token}), headers=headers)
-# # refresh_token = refresh.json()
-# # print(refresh_token)
-#
-# image_path = os.path.join(os.getcwd(), "logo.png")
-#
-# headers = {
-#     # "Content-Type": "application/json",
-#     "Authorization": "JWT " + token,
-# }
-#
-#
+
+
+
+
 # with open(image_path, 'rb') as image:
 #     file_data = {
 #         "image": image

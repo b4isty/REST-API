@@ -32,5 +32,7 @@ class Status(models.Model):  # fb status, instagram post, tweet, linkedin post
         verbose_name_plural = 'Status posts'
 
 
-
+    @property
+    def owner(self):
+        return self.user
 
