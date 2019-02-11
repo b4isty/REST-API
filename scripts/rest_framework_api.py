@@ -11,25 +11,28 @@ image_path = os.path.join(os.getcwd(), "logo.png")
 
 headers = {
     "Content-Type": "application/json",
-    # "Authorization": "JWT " + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTQ5NjI2NDIyLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwib3JpZ19pYXQiOjE1NDk2MjYxMjJ9.mNjLyhfUiNkpedKUOf2DZsY0Xag7rI6xanFGzcDa4XY'
+    "Authorization": "JWT " + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMSwidXNlcm5hbWUiOiJiZGc5IiwiZXhwIjoxNTQ5NzE5MzI5LCJlbWFpbCI6ImJkZzlAZXhhbXBsZS5jb20iLCJvcmlnX2lhdCI6MTU0OTcxOTAyOX0.C_yeEuIc8pLFFpYKpwHDZQSCCbkCfgqc5Ixc8Qeb4Js'
 }
 
 
 data = {
-    'username': "bdg4",
-    'email': "bdg4@example.com",
+    'username': "bdg12",
+    'email': "bdg12@example.com",
     'password': "pass#123",
     'password2': "pass#123"
 }
+
+
+r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
+token = r.json()#['token']
+print(r.json())
+# print(r.text)
+
 
 # data = {
 #     'username': "admin",
 #     'password': "pass#123",
 # }
-r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
-token = r.json()#['token']
-print(r.text)
-
 
 # REFRESH_ENDPOINT = AUTH_ENDPOINT + 'refresh/'
 
