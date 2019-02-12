@@ -3,7 +3,7 @@ from django.db.models import Q
 from rest_framework import permissions, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserRegisterSerializer
+from .serializers import UserRegisterSerializer, UserDetailSerializer
 from rest_framework_jwt.settings import api_settings
 from .permissions import AnonPermissionOnly
 # from .utils import jwt_response_payload_handler

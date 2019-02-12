@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^api/post/', include('blog.api.urls')),
     url(r'^api/status/', include('status.api.urls')),
     url(r'^api/auth/', include('accounts.api.urls')),
+    url(r'^api/user/', include('accounts.api.user.urls', namespace='api-user')),
 
     # url(r'^$', json_example_view),
     # url(r'^json/cbv/$', JsonCBV.as_view()),
@@ -32,3 +33,24 @@ urlpatterns = [
     # url(r'^json/cbv2/$', JsonCBV2.as_view()),
     # url(r'^$', JsonCBV)
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
