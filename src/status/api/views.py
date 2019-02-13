@@ -42,7 +42,7 @@ class StatusAPIDetailView(mixins.UpdateModelMixin,
         return self.destroy(request, *args, **kwargs)
 
     # def perform_update(self, serializer):
-        # return serializer.save(updated_by_user=self.request.user)
+    # return serializer.save(updated_by_user=self.request.user)
 
     # def perform_destroy(self, instance):
     #     if instance is not None:
@@ -58,21 +58,23 @@ class StatusAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
     passed_id = None
+    search_fields = ('user__username', 'content', 'user__email')
+    ordering_fields = ('user__username', 'timestamp')
+    queryset = Status.objects.all()
 
-    def get_queryset(self):
-        print(self.request.user)
-        qs = Status.objects.all()
-        query = self.request.GET.get('q')
-        if query is not None:
-            qs = qs.filter(content__icontains=query)
-        return qs
+    # def get_queryset(self):
+    #     print(self.request.user)
+    #     qs = Status.objects.all()
+    #     query = self.request.GET.get('q')
+    #     if query is not None:
+    #         qs = qs.filter(content__icontains=query)
+    #     return qs
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-
 
 # class StatusAPIView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
 #                     mixins.DestroyModelMixin, generics.ListAPIView):
@@ -163,8 +165,8 @@ class StatusAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 #         self.passed_id = passed_id
 #         return self.destroy(request, *args, **kwargs)
 
-    # def perform_create(self, serializer):
-    #     serializer.save(user=self.request.user)
+# def perform_create(self, serializer):
+#     serializer.save(user=self.request.user)
 
 
 # class StatusListSearchAPIView(APIView):
