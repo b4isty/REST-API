@@ -5,7 +5,6 @@ from status.models import Status
 from .serializers import UserDetailSerializer
 from status.api.views import StatusAPIView
 from rest_framework.response import Response
-
 User = get_user_model()
 
 
