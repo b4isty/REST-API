@@ -7,7 +7,7 @@ from accounts.api.serializers import UserPublicSerializer
 # serializers -> JSON
 # serializers -> validate data
 
-
+#changes
 class StatusSerializer(serializers.ModelSerializer):
     uri = serializers.SerializerMethodField(read_only=True)
     user = UserPublicSerializer(read_only=True)
