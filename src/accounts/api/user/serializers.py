@@ -9,13 +9,18 @@ User = get_user_model()
 class UserDetailSerializer(serializers.ModelSerializer):
     uri = serializers.SerializerMethodField(read_only=True)
     status = serializers.SerializerMethodField(read_only=True)
+    # statuses = serializers.HyperlinkedRelatedField(source='status_set',  # Status.objects.filter(user=user)
+    #                                                many=True,
+    #                                                read_only=True, lookup_field='id',
+    #                                                view_name='api-status:detail')
+    # statuses = StatusInlineUserSerializer(source='status_set', many=True, read_only=True)
 
     # status_uri = serializers.SerializerMethodField(read_only=True)
     # recent_status = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
-        fields = ["id", "username", "uri", "status"]
+        fields = ["id","username", "uri", "status"]
 
     def get_uri(self, obj):
         request = self.context.get("request")
@@ -38,7 +43,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
         data = {
             "uri": self.get_uri(obj) + "status/",
             "last": StatusInlineUserSerializer(qs.first(), context={"request": request}).data,
-            "recent": StatusInlineUserSerializer(qs[:limit], many=True,  context={"request": request}).data
+            "recent": StatusInlineUserSerializer(qs[:limit], many=True, context={"request": request}).data
         }
         return data
 

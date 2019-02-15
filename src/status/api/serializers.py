@@ -7,12 +7,14 @@ from accounts.api.serializers import UserPublicSerializer
 # serializers -> JSON
 # serializers -> validate data
 
-#changes
+# changes
 class StatusSerializer(serializers.ModelSerializer):
     uri = serializers.SerializerMethodField(read_only=True)
     user = UserPublicSerializer(read_only=True)
-
-    # user = serializers.SerializerMethodField(read_only=True)
+    # user_id = serializers.PrimaryKeyRelatedField(source='user', read_only=True)
+    # user_id = serializers.HyperlinkedRelatedField(source='user', lookup_field='username', view_name='api-user:detail',
+    #                                               read_only=True)
+    # user = serializers.SlugRelatedField(read_only=True, slug_field='username')
 
     class Meta:
         model = Status
